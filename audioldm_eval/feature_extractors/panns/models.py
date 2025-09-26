@@ -236,15 +236,15 @@ class Cnn14(nn.Module):
         if not os.path.exists("%s/.cache/audioldm_eval/ckpt/Cnn14_mAP=0.431.pth" % (home_dir)):
             print("Download pretrained checkpoints of Cnn14.")
             os.makedirs("%s/.cache/audioldm_eval/ckpt" % (home_dir), exist_ok=True)
-            os.system("wget -P %s/.cache/audioldm_eval/ckpt/ %s" % (home_dir,"https://zenodo.org/record/3576403/files/Cnn14_mAP%3D0.431.pth"))
-            os.system("wget -P %s/.cache/audioldm_eval/ckpt/ %s" % (home_dir,"https://zenodo.org/record/3987831/files/Cnn14_16k_mAP%3D0.438.pth"))
+            os.system("wget -P %s/.cache/audioldm_eval/ckpt/ %s" % (home_dir,"https://huggingface.co/Essid/MSG-LD-Files/resolve/main/Cnn14_mAP%3D0.431.pth"))
+            os.system("wget -P %s/.cache/audioldm_eval/ckpt/ %s" % (home_dir,"https://huggingface.co/Essid/MSG-LD-Files/resolve/main/Cnn14_16k_mAP%3D0.438.pth"))
 
         # self.init_weight()
         if sample_rate == 16000:
-            state_dict = torch.load("%s/.cache/audioldm_eval/ckpt/Cnn14_16k_mAP=0.438.pth" % home_dir)
+            state_dict = torch.load("%s/.cache/audioldm_eval/ckpt/Cnn14_16k_mAP=0.438.pth" % home_dir, weights_only=False)
             self.load_state_dict(state_dict["model"])
         elif sample_rate == 32000:
-            state_dict = torch.load("%s/.cache/audioldm_eval/ckpt/Cnn14_mAP=0.431.pth" % home_dir)
+            state_dict = torch.load("%s/.cache/audioldm_eval/ckpt/Cnn14_mAP=0.431.pth" % home_dir, weights_only=False)
             self.load_state_dict(state_dict["model"])
 
     def init_weight(self):
